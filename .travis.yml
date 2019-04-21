@@ -1,20 +1,26 @@
-language: python
-python:
-  - "3.6"
-# command to install dependencies
+# This will run on Travis' 'new' container-based infrastructure
+sudo: false 
 
-env:
-  - DJANGO_VERSION=2.1.7
-
+# Blacklist
 branches:
   only:
     - master
-    - dev
 
-install:
-  - pip install -q Django==$DJANGO_VERSION
-  - pip install -r requirements.txt
+# Install dependencies
+addons:
+  apt:
+    packages:
+      - doxygen
 
-# command to run tests
+# Build your code e.g. by calling make
 script:
-  - python manage.py test
+  - doxygen Doxyfile
+
+# Generate and deploy documentation
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: html
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: master
