@@ -23,4 +23,8 @@ deploy:
   local_dir: html
   github_token: $GH_REPO_TOKEN
   on:
+<<<<<<< HEAD
     branch: master
+=======
+    branch: master
+>>>>>>> b5f79d3afcdd271df3c55a482f1211ad784e8126
